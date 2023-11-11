@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ENTER THE REGISTRATION DETAILS</h1>
+    <form action="register.php" method="POST" id="myform">
+        <table border=1>
+            <tr><td>NAME(At least 10 characters)</td><td><input type="text" name="fname" id="fname"></td></tr>
+            <tr><td>LAST NAME(At least 10 characters)</td><td><input type="text" name="lname" id="lname"></td></tr>
+            <tr><td>Username (At least 8 characters)</td><td><input type="text" name="user" id="user"></td></tr>
+            <tr><td>AGE (18 and above ONLY)</td><td><input type="number" name="age" id="age"></td></tr>
+            <tr><td>Password(At least 10 characters)</td><td><input type="password" name="pwd" id="pwd"></td></tr>
+            <tr><td>Re-Enter password(At least 10 characters)</td><td><input type="password" name="repwd" id="repwd"></td></tr>
+            <tr><td colspan="2"><button type="button" id="but1" style="text-align: center;display: flex; margin: auto;">SUBMIT</button></td></tr>
+        </table>    
+    </form>
+    <div id="errmsg"></div>
+    <script>
+        var re = /[^a-zA-Z0-9]/;
+
+        but1.addEventListener("click",function(){
+            var fname = document.getElementById("fname").value;
+            var lname = document.getElementById("lname").value;
+            var user = document.getElementById("user").value;
+            var age = document.getElementById("age").value;
+            var pwd = document.getElementById("pwd").value;
+            var repwd = document.getElementById("repwd").value;
+            var but1 = document.getElementById("but1");
+            var msg = document.getElementById("errmsg");
+            if(re.test(fname) || fname===""){
+                msg.textContent = "SPECIAL CHARACTER DETECTED in or EMPTY first name!";
+                msg.style.color = "red";
+                setTimeout(() => {
+                    msg.textContent="";
+                },1000);
+            }
+            else{
+                if(re.test(lname) || lname===""){
+                    msg.textContent = "SPECIAL CHARACTER DETECTED or EMPTY in last name!";
+                    msg.style.color = "red";
+                    setTimeout(() => {
+                        msg.textContent="";
+                    },1000);
+                }
+                else{
+                    if(re.test(user) || user===""){
+                        msg.textContent = "SPECIAL CHARACTER DETECTED or EMPTY in username!";
+                        msg.style.color = "red";
+                        setTimeout(() => {
+                            msg.textContent="";
+                        },1000);
+                    }
+                    else{
+                        if(age<18){
+                            msg.textContent = "AGE: 18 and above ONLY!";
+                            msg.style.color = "red";
+                            setTimeout(() => {
+                                msg.textContent="";
+                            },1000);
+                        }
+                        else{
+                            if(re.test(pwd) || pwd===""){
+                                msg.textContent = "SPECIAL CHARACTER DETECTED or EMPTY in password!";
+                                msg.style.color = "red";
+                                setTimeout(() => {
+                                    msg.textContent="";
+                                },1000);
+                            }
+                            else{
+                                if(re.test(repwd) || repwd===""){
+                                    msg.textContent = "SPECIAL CHARACTER DETECTED or EMPTY in confirm-passoword!";
+                                    msg.style.color = "red";
+                                    setTimeout(() => {
+                                        msg.textContent="";
+                                    },1000);
+                                }
+                                else{
+                                    if(pwd===repwd){
+                                        document.getElementById("myform").submit();
+                                    }
+                                    else{
+                                        msg.textContent = "PASSWORDS DO NOT MATCH";
+                                        msg.style.color = "red";
+                                        setTimeout(() => {
+                                            msg.textContent="";
+                                        },1000);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
